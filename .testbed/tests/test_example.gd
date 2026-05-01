@@ -1,10 +1,10 @@
 extends GutTest
 
 func before_all():
-	gut.p("Starting Input Driver Tests...")
+	gut.p("Starting JoyCon HID input driver tests...")
 
 func after_all():
-	gut.p("Finished Input Driver Tests.")
+	gut.p("Finished JoyCon HID input driver tests.")
 
 func test_sanity_check():
 	assert_eq(1, 1, "Math should work")
@@ -16,3 +16,4 @@ func test_plugin_manifest_structure():
 	var config = ConfigFile.new()
 	assert_eq(config.load(manifest_path), OK, "plugin.cfg should load")
 	assert_true(config.get_value("plugin", "name", "") != "", "plugin name should be set")
+	assert_string_contains(config.get_value("plugin", "description", ""), "not an official v1 gameplay path", "plugin description should preserve the future-support v1 truth")
