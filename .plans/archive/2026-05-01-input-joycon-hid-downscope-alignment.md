@@ -66,6 +66,8 @@ The current official AeroBeat v1 product claim is camera-driven Boxing and Flow 
   - `godot --headless --path .testbed --import`
   - `godot --headless --path .testbed --script addons/gut/gut_cmdln.gd -gdir=res://tests -ginclude_subdirs -gexit`
 - **QA handoff notes:** verify the README/plugin wording consistently reads as future support only, confirm the hidden testbed restores `aerobeat-input-core` + GUT cleanly, and treat passing validation here as internal repo coherence rather than proof of official JoyCon gameplay support.
+- **QA findings (2026-05-01):** Independently re-read `README.md`, `plugin.cfg`, `.testbed/addons.jsonc`, `.testbed/project.godot`, `.testbed/tests/test_example.gd`, plus `REF-03` and `REF-04`. Confirmed the repo now consistently frames JoyCon HID as future/deprioritized experimentation only, explicitly preserves the camera-first official v1 truth, and points the testbed manifest at `aerobeat-input-core` rather than the old repo naming. Re-ran validation successfully with the same three commands above. No repo-local truth drift found in the audited surfaces. Attempted Beads access for QA note sync, but `bd` failed immediately with a workspace identity mismatch between `.beads/metadata.json` and the database project id, so no bead update was forced.
+- **Audit findings (2026-05-01):** Independent audit pass on repo truth and validation. Re-checked the downscoped source docs in `REF-03` and `REF-04`, re-read `README.md`, `plugin.cfg`, `.testbed/addons.jsonc`, `.testbed/project.godot`, and `.testbed/tests/test_example.gd`, and re-ran `godotenv addons install`, `godot --headless --path .testbed --import`, and GUT successfully. The repo truth is consistent: JoyCon HID is clearly future support only, camera remains the only official v1 gameplay input, the hidden testbed is labeled as a JoyCon HID workbench, and the manifest now targets `aerobeat-input-core`. Cleanliness check found one generated `.testbed/tests/test_example.gd.uid` artifact from validation; it was removed during audit so the repo returned to plan-only dirt. Bead closure is still subject to the repo's Beads identity mismatch guard.
 
 ---
 
@@ -76,6 +78,10 @@ The current official AeroBeat v1 product claim is camera-driven Boxing and Flow 
 **What We Built:** Completed a narrow truth pass for `aerobeat-input-joycon-hid` so its human-facing docs, plugin metadata, testbed manifest, and smoke tests all present JoyCon HID as preserved future experimentation instead of current AeroBeat v1 gameplay support.
 
 **Reference Check:** Satisfied `REF-03` and `REF-04` by aligning the repo to the docs truth that official v1 gameplay input is camera-only, while JoyCon stays documented as future support. The repo-local surfaces no longer claim official JoyCon parity.
+
+**QA Verification:** Independent QA re-verified README/plugin/testbed manifest/test surfaces, re-ran `godotenv addons install`, `godot --headless --path .testbed --import`, and GUT, and confirmed the hidden testbed now targets `aerobeat-input-core`. Bead note sync could not be recorded through `bd` because the repo currently reports a Beads workspace identity mismatch; the QA findings were recorded in this plan instead without forcing an override.
+
+**Audit Outcome:** ✅ Pass on truth, validation, and repo cleanliness after removing the generated `.testbed/tests/test_example.gd.uid` artifact created during validation. Auditor attempted to close bead `oc-92i`, but `bd close` was blocked by a Beads workspace identity mismatch (`.beads/metadata.json` project id != database project id). The bead therefore remains open pending repair of that Beads routing/config issue; no unsafe override was forced during audit.
 
 **Commits:**
 - `Downscope JoyCon HID repo truth surfaces`
