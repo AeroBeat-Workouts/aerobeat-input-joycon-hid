@@ -44,7 +44,7 @@ cd .testbed
 godotenv addons install
 ```
 
-That restores this repo's current dev/test manifest into `.testbed/addons/`, including the shared `aerobeat-input-core` contract package plus GUT for validation.
+That restores this repo's current dev/test manifest into `.testbed/addons/`, including the shared `aerobeat-input-core` contract package plus the vendor unit-test addon for validation.
 
 ### Open the workbench
 
@@ -69,7 +69,7 @@ godot --headless --path .testbed --import
 From the repo root:
 
 ```bash
-godot --headless --path .testbed --script addons/gut/gut_cmdln.gd \
+godot --headless --path .testbed --script addons/aerobeat-vendor-godot-unit-test/gut_cmdln.gd \
   -gdir=res://tests \
   -ginclude_subdirs \
   -gexit
